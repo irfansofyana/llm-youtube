@@ -1,0 +1,25 @@
+[project]
+name = "llm-youtube"
+version = "0.1"
+description = "LLM plugin for pulling content from Youtube videos"
+readme = "README.md"
+authors = [{name = "irfansofyana"}]
+license = "Apache-2.0"
+classifiers = []
+requires-python = ">=3.9"
+dependencies = [
+    "llm>=0.24"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/irfansofyana/llm-youtube"
+Changelog = "https://github.com/irfansofyana/llm-youtube/releases"
+Issues = "https://github.com/irfansofyana/llm-youtube/issues"
+CI = "https://github.com/irfansofyana/llm-youtube/actions"
+
+[project.entry-points.llm]
+youtube = "llm_youtube"
