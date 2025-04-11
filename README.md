@@ -46,14 +46,8 @@ python -m venv venv
 source venv/bin/activate
 ```
 
-Now install the dependencies and test dependencies:
+Now install the dependencies:
 
 ```bash
-pip install -e '.[test]'
-```
-
-To run the tests:
-
-```bash
-python -m pytest
+pip install -e .
 ```
