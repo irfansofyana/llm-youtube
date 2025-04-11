@@ -4,7 +4,7 @@ import re
 
 @llm.hookimpl
 def register_fragment_loaders(register):
-    register("youtube", youtube_fragment_loader)
+    register("yt", youtube_fragment_loader)
 
 def youtube_fragment_loader(input):
     """
@@ -23,7 +23,7 @@ def youtube_fragment_loader(input):
             raise ValueError(f"Could not extract YouTube video ID from: {input}")
 
         transcript = fetch_transcript(video_id)
-        source = f"youtube:{video_id}"
+        source = f"https://www.youtube.com/watch?v={video_id}"
 
         return llm.Fragment(transcript, source)
     except Exception as ex:

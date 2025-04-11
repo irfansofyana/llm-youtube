@@ -4,7 +4,7 @@ version = "0.1"
 description = "LLM plugin for pulling content from Youtube videos"
 readme = "README.md"
 authors = [{name = "irfansofyana"}]
-license = "Apache-2.0"
+license = {text = "Apache-2.0"}
 classifiers = []
 requires-python = ">=3.9"
 dependencies = [
@@ -23,3 +23,6 @@ CI = "https://github.com/irfansofyana/llm-youtube/actions"
 
 [project.entry-points.llm]
 youtube = "llm_youtube"
+
+[project.optional-dependencies]
+test = ["pytest", "youtube_transcript_api"]
