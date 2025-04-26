@@ -1,0 +1,48 @@
+# This workflow builds and publishes the package to PyPI on new releases
+name: Publish Python Package
+
+on:
+  release:
+    types: [created]
+  # Allow manual trigger from the GitHub Actions tab
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.9"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install build twine
+
+      - name: Build package
+        run: python -m build
+
+      - name: Check package with Twine
+        run: twine check dist/*
+
+      # Only publish to PyPI on release creation, not on manual workflow_dispatch
+      - name: Publish to PyPI
+        if: github.event_name == "release"
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          # Skip existing versions to prevent upload errors if the version already exists
+          skip_existing: true
+
+      # Add artifact upload for manual review
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-package
+          path: dist/
